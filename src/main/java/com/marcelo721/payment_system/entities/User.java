@@ -14,7 +14,6 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
 @Builder
 @RequiredArgsConstructor
 public class User implements UserDetails {
@@ -28,6 +27,9 @@ public class User implements UserDetails {
 
     @Column(name = "password")
     private String password;
+
+    @Column(name = "name", length = 50)
+    private String name;
 
     @Column(name = "verification_code")
     private String verificationCode;
