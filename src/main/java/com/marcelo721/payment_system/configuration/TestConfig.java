@@ -16,17 +16,5 @@ public class TestConfig implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-
-        User user = new User();
-
-
-        user.setEmail("marcelo@gmail.com");
-        user.setPassword("12345678");
-        user.setName("marcelo henrique de sousa");
-
-
-        System.out.println("created");
-        User user1 = userRepository.getReferenceById(1L);
-        System.out.println(user1.getId());
     }
 }
