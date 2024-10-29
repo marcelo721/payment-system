@@ -34,7 +34,7 @@ public class User implements UserDetails {
     @Column(name = "verification_code")
     private String verificationCode;
 
-    @Column(name = "enable")
+    @Column(name = "enabled")
     private Boolean enabled;
 
     @Override
