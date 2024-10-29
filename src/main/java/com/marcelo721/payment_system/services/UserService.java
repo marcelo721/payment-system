@@ -4,9 +4,9 @@ import com.marcelo721.payment_system.entities.User;
 import com.marcelo721.payment_system.repositories.UserRepository;
 import com.marcelo721.payment_system.services.exceptions.EmailUniqueViolationException;
 import com.marcelo721.payment_system.services.exceptions.EntityNotFoundException;
+import com.marcelo721.payment_system.services.exceptions.PasswordInvalidException;
 import com.marcelo721.payment_system.util.UserUtil;
 import lombok.RequiredArgsConstructor;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,24 +23,21 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public User registerUser(User user) {
+    public User saveUser(User user) {
 
-        try {
-            String passwordEncoded = passwordEncoder.encode(user.getPassword());
-            user.setPassword(passwordEncoded);
-
-            String randomCode = UserUtil.generateRandomString(64);
-            user.setVerificationCode(randomCode);
-            user.setEnabled(false);
-
-
-            return userRepository.save(user);
-
-        } catch (DataIntegrityViolationException ex) {
-            throw new EmailUniqueViolationException
-                    (String.format("Email {%s} already registered ", user.getEmail()));
-
+        if (userRepository.existsByEmail(user.getEmail())) {
+            throw new EmailUniqueViolationException(
+                    String.format("Email {%s} already registered ", user.getEmail()));
         }
+
+        String passwordEncoded = passwordEncoder.encode(user.getPassword());
+        user.setPassword(passwordEncoded);
+
+        String randomCode = UserUtil.generateRandomString(64);
+        user.setVerificationCode(randomCode);
+        user.setEnabled(false);
+
+        return userRepository.save(user);
     }
 
     @Transactional(readOnly = true)
@@ -51,7 +48,25 @@ public class UserService {
     }
 
     @Transactional(readOnly = true)
-    public List<User> findAllUsers(){
+    public List<User> findAllUsers() {
         return userRepository.findAll();
+    }
+
+    @Transactional
+    public User updatePassword(String currentPassword, String newPassword, String confirmNewPassword, long id) {
+
+        if (!newPassword.equals(confirmNewPassword)) {
+            throw new PasswordInvalidException("the confirmation passwords are different");
+        }
+
+        User user = findById(id);
+
+        if (!passwordEncoder.matches(currentPassword, user.getPassword())) {
+            throw new PasswordInvalidException("The password is wrong");
+        }
+
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
+        return user;
     }
 }
