@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1/users")
 @RequiredArgsConstructor
@@ -44,5 +46,14 @@ public class UserController {
         User user = userService.findById(id);
 
         return ResponseEntity.ok(UserResponseDto.toDto(user));
+    }
+
+    @GetMapping()
+    public ResponseEntity<List<UserResponseDto>> findById(){
+
+        log.info("Finding all users");
+        List<UserResponseDto> users = UserResponseDto.toListDto(userService.findAllUsers());
+
+        return ResponseEntity.ok(users);
     }
 }
