@@ -1,7 +1,7 @@
 package com.marcelo721.payment_system.configuration;
 
 
-import com.marcelo721.payment_system.component.CustomAuthenticationEntryPoint;
+import com.marcelo721.payment_system.components.CustomAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

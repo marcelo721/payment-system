@@ -1,4 +1,4 @@
-package com.marcelo721.payment_system.component;
+package com.marcelo721.payment_system.components;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.marcelo721.payment_system.web.exceptions.ErrorMessage;

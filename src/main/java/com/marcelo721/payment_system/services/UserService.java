@@ -5,7 +5,7 @@ import com.marcelo721.payment_system.repositories.UserRepository;
 import com.marcelo721.payment_system.services.exceptions.EmailUniqueViolationException;
 import com.marcelo721.payment_system.services.exceptions.EntityNotFoundException;
 import com.marcelo721.payment_system.services.exceptions.PasswordInvalidException;
-import com.marcelo721.payment_system.util.UserUtil;
+import com.marcelo721.payment_system.utils.UserUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

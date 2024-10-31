@@ -1,4 +1,4 @@
-package com.marcelo721.payment_system.util;
+package com.marcelo721.payment_system.utils;
 
 import java.security.SecureRandom;
 

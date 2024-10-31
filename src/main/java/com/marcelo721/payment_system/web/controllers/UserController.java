@@ -25,9 +25,8 @@ public class UserController {
     @PostMapping
     public ResponseEntity<UserResponseDto> save(@Valid @RequestBody UserCreateDto userCreateDto){
 
-        User     obj = userCreateDto.toUser();
+        User obj = userCreateDto.toUser();
         userService.saveUser(obj);
-
         return ResponseEntity.status(HttpStatus.CREATED).body(UserResponseDto.toDto(obj));
     }
 
@@ -41,19 +40,15 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<UserResponseDto> findById( @PathVariable long id){
-
         log.info("Fetching user with id: {}", id);
         User user = userService.findById(id);
-
         return ResponseEntity.ok(UserResponseDto.toDto(user));
     }
 
     @GetMapping()
-    public ResponseEntity<List<UserResponseDto>> findById(){
-
+    public ResponseEntity<List<UserResponseDto>> findAllUsers(){
         log.info("Finding all users");
         List<UserResponseDto> users = UserResponseDto.toListDto(userService.findAllUsers());
-
         return ResponseEntity.ok(users);
     }
 }
