@@ -6,12 +6,14 @@ import com.marcelo721.payment_system.services.exceptions.EmailUniqueViolationExc
 import com.marcelo721.payment_system.services.exceptions.EntityNotFoundException;
 import com.marcelo721.payment_system.services.exceptions.PasswordInvalidException;
 import com.marcelo721.payment_system.utils.UserUtil;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,9 +23,10 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final EmailService emailService;
 
     @Transactional
-    public User saveUser(User user) {
+    public User saveUser(User user) throws MessagingException, UnsupportedEncodingException {
 
         if (userRepository.existsByEmail(user.getEmail())) {
             throw new EmailUniqueViolationException(
@@ -37,6 +40,8 @@ public class UserService {
         user.setVerificationCode(randomCode);
         user.setEnabled(false);
 
+
+        emailService.sendVerifyEmail(user);
         return userRepository.save(user);
     }
 
