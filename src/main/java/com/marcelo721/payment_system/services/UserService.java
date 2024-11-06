@@ -1,12 +1,14 @@
 package com.marcelo721.payment_system.services;
 
 import com.marcelo721.payment_system.entities.User;
+import com.marcelo721.payment_system.entities.enums.StatusAccount;
 import com.marcelo721.payment_system.repositories.UserRepository;
 import com.marcelo721.payment_system.services.exceptions.EmailUniqueViolationException;
 import com.marcelo721.payment_system.services.exceptions.EntityNotFoundException;
 import com.marcelo721.payment_system.services.exceptions.PasswordInvalidException;
 import com.marcelo721.payment_system.utils.UserUtil;
 import jakarta.mail.MessagingException;
+import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -38,7 +40,7 @@ public class UserService {
 
         String randomCode = UserUtil.generateRandomString(64);
         user.setVerificationCode(randomCode);
-        user.setEnabled(false);
+        user.setEnabled(StatusAccount.DISABLED);
 
 
         emailService.sendVerifyEmail(user);
@@ -78,11 +80,11 @@ public class UserService {
     public Boolean verify(String code) {
         User user = userRepository.findByVerificationCode(code);
 
-        if (user == null || user.isEnabled()) {
+        if (user == null || user.getEnabled().equals(StatusAccount.DISABLED)) {
             return false;
         } else {
             user.setVerificationCode(null);
-            user.setEnabled(true);
+            user.setEnabled(StatusAccount.ENABLED);
             userRepository.save(user);
             return true;
         }

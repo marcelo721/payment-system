@@ -1,6 +1,7 @@
 package com.marcelo721.payment_system.entities;
 
 
+import com.marcelo721.payment_system.entities.enums.StatusAccount;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -35,7 +36,8 @@ public class User implements UserDetails {
     private String verificationCode;
 
     @Column(name = "enabled")
-    private Boolean enabled;
+    @Builder.Default
+    private StatusAccount enabled = StatusAccount.DISABLED;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -45,10 +47,5 @@ public class User implements UserDetails {
     @Override
     public String getUsername() {
         return email;
-    }
-
-    @Override
-    public boolean isEnabled() {
-        return this.enabled;
     }
 }
