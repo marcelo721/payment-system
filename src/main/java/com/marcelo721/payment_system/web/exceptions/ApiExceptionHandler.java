@@ -1,10 +1,7 @@
 package com.marcelo721.payment_system.web.exceptions;
 
 import com.auth0.jwt.exceptions.JWTCreationException;
-import com.marcelo721.payment_system.services.exceptions.EmailUniqueViolationException;
-import com.marcelo721.payment_system.services.exceptions.EntityNotFoundException;
-import com.marcelo721.payment_system.services.exceptions.IntegrityViolationException;
-import com.marcelo721.payment_system.services.exceptions.PasswordInvalidException;
+import com.marcelo721.payment_system.services.exceptions.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -151,5 +148,15 @@ public class ApiExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(new ErrorMessage(request, HttpStatus.CONFLICT,"Conflict when inserting record: duplicate entry" + ex.getMessage()));
+    }
+
+    @ExceptionHandler(UserAccountNotEnabledException.class)
+    public ResponseEntity<ErrorMessage> userAccountNotEnabledException ( UserAccountNotEnabledException ex, HttpServletRequest request){
+
+        log.error("Api error !");
+
+        return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(new ErrorMessage(request, HttpStatus.FORBIDDEN,"ERROR! " + ex.getMessage()));
     }
 }

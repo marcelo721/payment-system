@@ -6,6 +6,7 @@ import com.marcelo721.payment_system.repositories.UserRepository;
 import com.marcelo721.payment_system.services.exceptions.EmailUniqueViolationException;
 import com.marcelo721.payment_system.services.exceptions.EntityNotFoundException;
 import com.marcelo721.payment_system.services.exceptions.PasswordInvalidException;
+import com.marcelo721.payment_system.services.exceptions.UserAccountNotEnabledException;
 import com.marcelo721.payment_system.utils.UserUtil;
 import jakarta.mail.MessagingException;
 import lombok.Builder;
@@ -50,9 +51,16 @@ public class UserService {
     @Transactional(readOnly = true)
     public User findById(long id) {
 
-        Optional<User> obj = userRepository.findById(id);
-        return obj.orElseThrow((() -> new EntityNotFoundException("User Not Found")));
+        return userRepository.findById(id)
+                .map(user -> {
+                    if (user.getEnabled() == StatusAccount.DISABLED) {
+                        throw new UserAccountNotEnabledException("Account not enabled");
+                    }
+                    return user;
+                })
+                .orElseThrow(() -> new EntityNotFoundException("User Not Found"));
     }
+
 
     @Transactional(readOnly = true)
     public List<User> findAllUsers() {
@@ -81,15 +89,14 @@ public class UserService {
 
         User user = userRepository.findByVerificationCode(code);
 
-        if (user == null) {
+        if (user == null || user.getEnabled().equals(StatusAccount.ENABLED)) {
             return StatusAccount.ALREADY_ENABLED;
 
-        } else if(user.getEnabled().equals(StatusAccount.DISABLED)){
+        } else{
             user.setVerificationCode(null);
             user.setEnabled(StatusAccount.ENABLED);
             userRepository.save(user);
             return StatusAccount.ENABLED ;
         }
-        return null;
     }
 }
