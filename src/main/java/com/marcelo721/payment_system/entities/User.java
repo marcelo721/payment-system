@@ -36,8 +36,7 @@ public class User implements UserDetails {
     private String verificationCode;
 
     @Column(name = "enabled")
-    @Builder.Default
-    private StatusAccount enabled = StatusAccount.DISABLED;
+    private StatusAccount enabled;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

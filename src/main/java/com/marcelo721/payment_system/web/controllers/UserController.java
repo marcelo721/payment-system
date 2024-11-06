@@ -39,7 +39,7 @@ public class UserController {
     public ResponseEntity<Void> updatePassword( @PathVariable Long id,  @Valid @RequestBody UserPasswordDto user){
 
         log.info("Updating password for user with id: {}", id);
-        User obj = userService.updatePassword(user.currentPassword(),user.newPassword(), user.confirmPassword(), id);
+        userService.updatePassword(user.currentPassword(),user.newPassword(), user.confirmPassword(), id);
         return ResponseEntity.noContent().build();
     }
 

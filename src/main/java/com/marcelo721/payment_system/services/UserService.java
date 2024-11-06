@@ -80,7 +80,7 @@ public class UserService {
     public Boolean verify(String code) {
         User user = userRepository.findByVerificationCode(code);
 
-        if (user == null || user.getEnabled().equals(StatusAccount.DISABLED)) {
+        if (user == null || user.getEnabled().equals(StatusAccount.ENABLED)) {
             return false;
         } else {
             user.setVerificationCode(null);
