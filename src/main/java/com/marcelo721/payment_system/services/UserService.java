@@ -77,16 +77,19 @@ public class UserService {
         return user;
     }
 
-    public Boolean verify(String code) {
+    public StatusAccount verify(String code) {
+
         User user = userRepository.findByVerificationCode(code);
 
-        if (user == null || user.getEnabled().equals(StatusAccount.ENABLED)) {
-            return false;
-        } else {
+        if (user == null) {
+            return StatusAccount.ALREADY_ENABLED;
+
+        } else if(user.getEnabled().equals(StatusAccount.DISABLED)){
             user.setVerificationCode(null);
             user.setEnabled(StatusAccount.ENABLED);
             userRepository.save(user);
-            return true;
+            return StatusAccount.ENABLED ;
         }
+        return null;
     }
 }

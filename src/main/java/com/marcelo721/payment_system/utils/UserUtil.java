@@ -406,4 +406,139 @@ public class UserUtil {
                 "\n" +
                 "</html>";
     }
+
+    public static String verifyEnabledAccount(){
+        return "<!DOCTYPE html>\n" +
+                "<html lang=\"pt-BR\">\n" +
+                "<head>\n" +
+                "    <meta charset=\"UTF-8\">\n" +
+                "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
+                "    <title>Conta Ativada</title>\n" +
+                "    <style>\n" +
+                "        body {\n" +
+                "            font-family: Arial, sans-serif;\n" +
+                "            display: flex;\n" +
+                "            align-items: center;\n" +
+                "            justify-content: center;\n" +
+                "            height: 100vh;\n" +
+                "            margin: 0;\n" +
+                "            background-color: #f2f2f2;\n" +
+                "        }\n" +
+                "        .container {\n" +
+                "            background-color: #fff;\n" +
+                "            padding: 20px;\n" +
+                "            border-radius: 10px;\n" +
+                "            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n" +
+                "            text-align: center;\n" +
+                "            max-width: 400px;\n" +
+                "            width: 100%;\n" +
+                "        }\n" +
+                "        h1 {\n" +
+                "            color: #4CAF50;\n" +
+                "        }\n" +
+                "        p {\n" +
+                "            color: #555;\n" +
+                "        }\n" +
+                "    </style>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "\n" +
+                "<div class=\"container\">\n" +
+                "    <h1>Conta Ativada!</h1>\n" +
+                "    <p>Parabéns! Sua conta foi ativada com sucesso.</p>\n" +
+                "</div>\n" +
+                "\n" +
+                "</body>\n" +
+                "</html>\n";
+    }
+
+    public static String reportAccountNotEnabled(){
+        return "<!DOCTYPE html>\n" +
+                "<html lang=\"pt-BR\">\n" +
+                "<head>\n" +
+                "    <meta charset=\"UTF-8\">\n" +
+                "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
+                "    <title>Conta Não Ativada</title>\n" +
+                "    <style>\n" +
+                "        body {\n" +
+                "            font-family: Arial, sans-serif;\n" +
+                "            display: flex;\n" +
+                "            align-items: center;\n" +
+                "            justify-content: center;\n" +
+                "            height: 100vh;\n" +
+                "            margin: 0;\n" +
+                "            background-color: #f8d7da;\n" +
+                "        }\n" +
+                "        .container {\n" +
+                "            background-color: #fff;\n" +
+                "            padding: 20px;\n" +
+                "            border-radius: 10px;\n" +
+                "            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n" +
+                "            text-align: center;\n" +
+                "            max-width: 400px;\n" +
+                "            width: 100%;\n" +
+                "        }\n" +
+                "        h1 {\n" +
+                "            color: #dc3545;\n" +
+                "        }\n" +
+                "        p {\n" +
+                "            color: #555;\n" +
+                "        }\n" +
+                "    </style>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "\n" +
+                "<div class=\"container\">\n" +
+                "    <h1>Conta Não Ativada</h1>\n" +
+                "    <p>Desculpe, sua conta ainda não foi ativada. Por favor, verifique seu e-mail para mais instruções.</p>\n" +
+                "</div>\n" +
+                "\n" +
+                "</body>\n" +
+                "</html>\n";
+    }
+
+    public static String verifyAccountAlreadyEnabled(){
+        return "<!DOCTYPE html>\n" +
+                "<html lang=\"pt-BR\">\n" +
+                "<head>\n" +
+                "    <meta charset=\"UTF-8\">\n" +
+                "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
+                "    <title>Conta Já Ativada</title>\n" +
+                "    <style>\n" +
+                "        body {\n" +
+                "            font-family: Arial, sans-serif;\n" +
+                "            display: flex;\n" +
+                "            align-items: center;\n" +
+                "            justify-content: center;\n" +
+                "            height: 100vh;\n" +
+                "            margin: 0;\n" +
+                "            background-color: #e7f3fe;\n" +
+                "        }\n" +
+                "        .container {\n" +
+                "            background-color: #fff;\n" +
+                "            padding: 20px;\n" +
+                "            border-radius: 10px;\n" +
+                "            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);\n" +
+                "            text-align: center;\n" +
+                "            max-width: 400px;\n" +
+                "            width: 100%;\n" +
+                "        }\n" +
+                "        h1 {\n" +
+                "            color: #007bff;\n" +
+                "        }\n" +
+                "        p {\n" +
+                "            color: #555;\n" +
+                "        }\n" +
+                "    </style>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "\n" +
+                "<div class=\"container\">\n" +
+                "    <h1>Conta Já Ativada</h1>\n" +
+                "    <p>Sua conta já está ativada. Não é necessário ativá-la novamente.</p>\n" +
+                "</div>\n" +
+                "\n" +
+                "</body>\n" +
+                "</html>\n";
+    }
 }
