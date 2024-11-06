@@ -36,6 +36,7 @@ public class User implements UserDetails {
     private String verificationCode;
 
     @Column(name = "enabled")
+    @Enumerated(EnumType.STRING)
     private StatusAccount enabled;
 
     @Override
