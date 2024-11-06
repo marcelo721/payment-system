@@ -75,15 +75,16 @@ public class UserService {
         return user;
     }
 
-    public Boolean verify (String code){
+    public Boolean verify(String code) {
         User user = userRepository.findByVerificationCode(code);
 
-        if(user == null || !user.isEnabled()) {
+        if (user == null || user.isEnabled()) {
             return false;
-        }else
+        } else {
             user.setVerificationCode(null);
-        user.setEnabled(true);
-        userRepository.save(user);
-        return true;
+            user.setEnabled(true);
+            userRepository.save(user);
+            return true;
+        }
     }
 }

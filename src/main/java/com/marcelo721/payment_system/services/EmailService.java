@@ -16,7 +16,7 @@ public class EmailService {
 
     private final JavaMailSender javaMailSender;
 
-    String verifyUrl = "http://localhost:8080/user/verify?code=";
+    String verifyUrl = "http://localhost:8080/api/v1/users/verify?code=";
 
     public EmailService(JavaMailSender javaMailSender) {
         this.javaMailSender = javaMailSender;

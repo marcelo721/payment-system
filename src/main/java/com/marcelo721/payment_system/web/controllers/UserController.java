@@ -7,9 +7,7 @@ import com.marcelo721.payment_system.web.dto.UserPasswordDto;
 import com.marcelo721.payment_system.web.dto.UserResponseDto;
 import jakarta.mail.MessagingException;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -59,13 +57,13 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
-//    @GetMapping("/verify")
-//    public String verifyCode(@Param("code") String code){
-//
-//        if (userService.verify(code)){
-//            return "Verified";
-//        }else {
-//            return "Not Verified";
-//        }
-//    }
+    @GetMapping("/verify")
+    public String verifyCode(@Param("code") String code){
+
+        if (userService.verify(code)){
+            return "Verified";
+        }else {
+            return "Not Verified";
+        }
+    }
 }

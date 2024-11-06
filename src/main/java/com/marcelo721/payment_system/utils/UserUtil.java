@@ -405,6 +405,5 @@ public class UserUtil {
                 "</body>\n" +
                 "\n" +
                 "</html>";
-
     }
 }

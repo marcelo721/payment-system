@@ -5,10 +5,10 @@ import com.marcelo721.payment_system.entities.User;
 import java.util.ArrayList;
 import java.util.List;
 
-public  record UserResponseDto(String name, String email, Long id) {
+public  record UserResponseDto(String name, String email, Long id, String verificationCode) {
 
     public static UserResponseDto toDto(User user){
-        return new UserResponseDto(user.getName(), user.getEmail(), user.getId());
+        return new UserResponseDto(user.getName(), user.getEmail(), user.getId(), user.getVerificationCode());
     }
 
     public static List<UserResponseDto> toListDto(List<User> users){
