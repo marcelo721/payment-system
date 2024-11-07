@@ -31,12 +31,11 @@ public class SecurityFilter extends OncePerRequestFilter {
                                     FilterChain filterChain) throws ServletException, IOException {
 
         JwtToken token = this.recoverToken(request);
-        UsernamePasswordAuthenticationToken authentication = null;
         if (null != token.getToken()) {
             var subject = tokenService.validateToken(token);
             UserDetails user = userRepository.findByEmail(subject);
 
-            authentication = new UsernamePasswordAuthenticationToken(user, null);
+            var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
         }

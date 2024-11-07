@@ -36,7 +36,7 @@ public class TokenService {
     }
 
     private Instant ExpitarionDate() {
-        return LocalDateTime.now().plusMinutes(1).toInstant(ZoneOffset.of("03:00"));
+        return LocalDateTime.now().plusMinutes(1).toInstant(ZoneOffset.of("-03:00"));
     }
 
     public String validateToken(JwtToken jwtToken) {
