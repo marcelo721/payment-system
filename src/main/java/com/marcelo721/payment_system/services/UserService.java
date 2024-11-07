@@ -9,7 +9,6 @@ import com.marcelo721.payment_system.services.exceptions.PasswordInvalidExceptio
 import com.marcelo721.payment_system.services.exceptions.UserAccountNotEnabledException;
 import com.marcelo721.payment_system.utils.UserUtil;
 import jakarta.mail.MessagingException;
-import lombok.Builder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
