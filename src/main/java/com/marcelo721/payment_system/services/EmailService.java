@@ -2,7 +2,7 @@ package com.marcelo721.payment_system.services;
 
 
 import com.marcelo721.payment_system.entities.User;
-import com.marcelo721.payment_system.utils.UserUtil;
+import com.marcelo721.payment_system.view.EmailView;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -27,7 +27,7 @@ public class EmailService {
         String fromAddress = "marceloh.sousa@alu.ufc.br";
         String senderName = "Marcelo721";
         String subject = "please verify your registration";
-        String content = UserUtil.verificationCodeView();
+        String content = EmailView.verificationCodeView();
 
         MimeMessage message = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message);
