@@ -4,6 +4,7 @@ import com.marcelo721.payment_system.entities.User;
 import com.marcelo721.payment_system.entities.enums.StatusAccount;
 import com.marcelo721.payment_system.services.UserService;
 import com.marcelo721.payment_system.utils.UserUtil;
+import com.marcelo721.payment_system.view.EmailView;
 import com.marcelo721.payment_system.web.dto.UserCreateDto;
 import com.marcelo721.payment_system.web.dto.UserPasswordDto;
 import com.marcelo721.payment_system.web.dto.UserResponseDto;
@@ -63,11 +64,11 @@ public class UserController {
     public String verifyCode(@Param("code") String code){
 
         if (userService.verify(code) == StatusAccount.ENABLED){
-            return UserUtil.verifyEnabledAccount();
+            return EmailView.verifyEnabledAccount();
         }else if (userService.verify(code) == StatusAccount.ALREADY_ENABLED){
-            return UserUtil.verifyAccountAlreadyEnabled();
+            return EmailView.verifyAccountAlreadyEnabled();
         } else {
-            return UserUtil.reportAccountNotEnabled();
+            return EmailView.reportAccountNotEnabled();
         }
     }
 }

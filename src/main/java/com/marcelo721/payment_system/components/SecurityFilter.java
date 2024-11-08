@@ -30,9 +30,9 @@ public class SecurityFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
-        JwtToken token = this.recoverToken(request);
-        if (null != token.getToken()) {
-            var subject = tokenService.validateToken(token);
+        String token = this.extractToken(request);
+        if (token != null) {
+            var subject = tokenService.validateToken(new JwtToken(token));
             UserDetails user = userRepository.findByEmail(subject);
 
             var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
@@ -44,13 +44,15 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     }
 
-    private JwtToken recoverToken(HttpServletRequest request) {
+    public String extractToken(HttpServletRequest request){
 
         var authHeader = request.getHeader("Authorization");
-        if (authHeader == null) {
+        if (authHeader == null)
             return null;
-        } else {
-            return new JwtToken(authHeader.replace("Bearer ", ""));
+
+        if(!authHeader.split(" ")[0].equals("Bearer")){
+            return null;
         }
+        return authHeader.split(" ")[1];
     }
 }

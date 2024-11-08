@@ -39,7 +39,7 @@ public class AuthenticationController {
             var auth = authenticationManager.authenticate(usernamePassword);
             JwtToken token = tokenService.generateToken((User) auth.getPrincipal());
 
-            return  ResponseEntity.ok(token.getToken());
+            return  ResponseEntity.ok(new JwtToken(token.getToken()));
         }catch (AuthenticationException e) {
             log.warn("Bad credentials");
         }
